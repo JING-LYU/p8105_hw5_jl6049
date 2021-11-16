@@ -6,16 +6,14 @@ output: html_document
 ---
 
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
-
 ```
 
 
 ```{r}
 homicide = read.csv("homicide-data.csv")
 unique(homicide$disposition)
-
 ```
 The dataset contains *`r count(homicide)`* observations of homicides in 50 large U.S. cities.
 
@@ -45,7 +43,7 @@ From the dataset, we could know the basic information of the victim in a homicid
 ```{r}
 homicide_number =
   homicide %>% 
-  mutate(city_state = paste(city,state,sep=",")) %>% 
+  mutate(city_state = paste(city,state,sep = ",")) %>% 
   group_by(city) %>% 
   summarise(n_homicide = n(),
             n_unsolved = sum((disposition == "Closed without arrest") | (disposition == "Open/No arrest"))
@@ -68,7 +66,6 @@ confidence_high  = round(pull(tidy_test,conf.high),2)
 
 tibble(estimated_proportion,confidence_low,confidence_high)
 ```
-
 Now run prop.test for each of the cities in your dataset, and extract both the proportion of unsolved homicides and the confidence interval for each. Do this within a “tidy” pipeline, making use of purrr::map, purrr::map2, list columns and unnest as necessary to create a tidy dataframe with estimated proportions and CIs for each city.
 
 ```{r}
@@ -117,6 +114,7 @@ homicide_number_test_result %>%
     y = "Value"
   )
 ```
+
 # Problem 2
 
 ```{r}
@@ -146,6 +144,7 @@ data_participant =
 
   
 ```
+
 Make a spaghetti plot showing observations on each subject over time, and comment on differences between groups.
 
 ```{r}
@@ -170,19 +169,15 @@ The differences beween the data of 10 participants in control arm have patterns 
 # problem 3
 
 ```{r}
-
-
 set.seed(10)
 
 iris_with_missing = iris %>% 
   map_df(~replace(.x, sample(1:150, 20), NA)) %>%
   mutate(Species = as.character(Species))
+```
 
 
-
-
-
-
+```{r}
 fill_missing = function(x){
   if (is.numeric(x)) {
 
