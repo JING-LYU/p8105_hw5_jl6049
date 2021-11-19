@@ -4,7 +4,7 @@ author: "LYU JING"
 date: "11/13/2021"
 output: github_document
 ---
-# Problem
+# Problem 1
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -113,7 +113,7 @@ homicide_number_test_result %>%
   coord_flip() +
   labs(
     title = "Estimates proportion and CIs of the number of unsolved homicides for each city",
-    x = "city_state",
+    x = "City,state",
     y = "Value"
   )
 ```
